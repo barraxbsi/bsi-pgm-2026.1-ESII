@@ -2,8 +2,8 @@
 ## Sistema de Gestão de Empréstimo de Equipamentos — UFRA Paragominas
 
 **Versão:** 1.0
-**Data:** Março de 2025
-**Responsável:** João Silva (Desenvolvedor Backend)
+**Data:** Abril de 2026
+**Responsável:** Wagner barral (Desenvolvedor Backend)
 
 ---
 
@@ -96,4 +96,4 @@ Variáveis globais (fora da classe):
 
 | Versão | Data | Responsável | Descrição |
 |---|---|---|---|
-| 1.0 | Mar/2025 | João Silva | Versão inicial funcional — entrega com dívida técnica registrada |
+| 1.0 | Abr/2026 | Wagner Barral | Versão inicial funcional — entrega com dívida técnica registrada |
