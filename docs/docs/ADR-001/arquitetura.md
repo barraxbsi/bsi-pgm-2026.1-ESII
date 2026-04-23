@@ -18,10 +18,10 @@ O problema central é definir uma organização de código que permita atender a
      Estrutura simples, com todo o código em um único arquivo.
    **Problemas:**
 
-  **01** Alto acoplamento: qualquer mudança impacta várias partes do código.
-  **02**Dificulta a adição de novos tipos sem modificar diferentes trechos (não atende RNF03).
-  **03**Regras de negócio ficam misturadas com entrada/saída, dificultando testes isolados (não atende RNF04).
-  **04**Motivo do descarte: não escala e compromete extensibilidade e testabilidade.
+Alto acoplamento: qualquer mudança impacta várias partes do código.
+Dificulta a adição de novos tipos sem modificar diferentes trechos (não atende RNF03).
+Regras de negócio ficam misturadas com entrada/saída, dificultando testes isolados (não atende RNF04).
+Motivo do descarte: não escala e compromete extensibilidade e testabilidade.
 
 
 ## 2.1 MVC
