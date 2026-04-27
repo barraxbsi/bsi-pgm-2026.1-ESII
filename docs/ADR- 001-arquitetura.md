@@ -65,3 +65,19 @@ Motivo da escolha: melhor equilíbrio entre simplicidade, organização e capaci
    **interface → application → domain → infrastructure**
 
       Essa organização garante separação clara de responsabilidades sem introduzir complexidade excessiva para o contexto do projeto.
+
+## 4.0 Consequências:
+
+**Impactos positivos:**
+
+  -Redução do acoplamento entre partes do sistema
+  -Facilidade para adicionar novos tipos com impacto localizado (atende RNF03)
+  -Regras de negócio isoladas e testáveis sem dependências externas (atende RNF04)
+  -Código mais organizado e fácil de manter
+  -Estrutura adequada para aplicações CLI
+
+**Impactos negativos:**
+
+  -Aumento na quantidade de arquivos e diretórios
+  -Necessidade de disciplina para respeitar a separação entre camadas
+  -Leve curva de aprendizado para a equipe iniciante
