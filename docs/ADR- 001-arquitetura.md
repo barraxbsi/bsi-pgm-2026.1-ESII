@@ -8,6 +8,7 @@
 O sistema precisa evoluir para uma nova versão mantendo qualidade estrutural e facilidade de manutenção. Para isso, deve atender aos seguintes requisitos não funcionais:
 
 RNF03: o sistema deve permitir a adição de novos tipos sem a necessidade de modificar múltiplos módulos, evitando alto acoplamento e facilitando a evolução.
+
 RNF04: as regras de negócio devem poder ser testadas de forma isolada, sem depender de estado externo (como arquivos, banco de dados ou entrada do usuário).
 
 O problema central é definir uma organização de código que permita atender a esses dois requisitos ao mesmo tempo, sem introduzir complexidade excessiva para uma aplicação de linha de comando e uma equipe iniciante.
