@@ -1,4 +1,4 @@
-## Arquitetura - aula 03
+## Arquitetura - aula 02
 
 **Versão:** 2.0
 **Data:** Abril de 2026
@@ -24,16 +24,17 @@ Regras de negócio ficam misturadas com entrada/saída, dificultando testes isol
 Motivo do descarte: não escala e compromete extensibilidade e testabilidade.
 
 
-## 2.1 MVC
+## MVC
 
 Divide o sistema em Model, View e Controller.
-    Pontos positivos:
+  **Pontos positivos:**
     Boa separação de responsabilidades.
 Permite testar o Model de forma isolada.
   **Problemas:**
       -Estrutura mais complexa do que o necessário para uma aplicação CLI.
       -Introduz conceitos (como View) pouco úteis no contexto.
-Motivo do descarte: atende os requisitos, mas com custo de complexidade maior que o necessário para o projeto e a equipe.
+  **Motivo do descarte:** 
+      -atende os requisitos, mas com custo de complexidade maior que o necessário para o projeto e a equipe.
 
 ## Arquitetura em camadas
 
@@ -43,3 +44,24 @@ Organiza o sistema em camadas com responsabilidades bem definidas.
       Facilita a adição de novos tipos com impacto localizado (atende RNF03).
       Estrutura simples e adequada para CLI.
 Motivo da escolha: melhor equilíbrio entre simplicidade, organização e capacidade de evolução do sistema.
+
+## 3.0 Decisão:
+      Será adotada a arquitetura em camadas, organizando o sistema em módulos com responsabilidades bem definidas.
+        As camadas serão estruturadas da seguinte forma:
+
+   **src/interface/**
+        Responsável pela interação com o usuário via CLI.
+        Contém leitura de entrada (comandos) e exibição de saída no terminal.
+   **src/application/**
+        Contém os casos de uso do sistema.
+        Coordena o fluxo de execução, recebendo dados da interface e acionando o domínio.
+   **src/domain/**
+        Núcleo do sistema, contendo entidades e regras de negócio.
+        Não depende de nenhuma outra camada, permitindo testes isolados.
+   **src/infrastructure/**
+        Responsável por detalhes técnicos, como persistência de dados, arquivos ou integrações externas.
+
+## Fluxo de dependência:
+   **interface → application → domain → infrastructure**
+
+      Essa organização garante separação clara de responsabilidades sem introduzir complexidade excessiva para o contexto do projeto.
