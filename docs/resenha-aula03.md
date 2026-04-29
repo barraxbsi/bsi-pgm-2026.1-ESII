@@ -1,6 +1,8 @@
 # Resenha Aula 3 — Modelos UML e Design de Componentes 
  
-**Aluno:** <Wagner barral da conceicao> 
+**Aluno:** 
+<Wagner_barral_da_conceicao> 
+
 **Data:** <29/04/2026> 
  
 ## Questão 1 — Modelos UML como ferramentas de modelagem 
