@@ -66,4 +66,11 @@ class ServicoEmprestimo:
             if emprestimo["dias_atraso"] > 0:
                 atrasados.append(emprestimo)
 
+                if tipo == "livro":
+                  multa = 2.0 * dias_atraso
+                   elif tipo == "eletronico":
+                   multa = 10.0 * dias_atraso
+                  
+     def calcular_multa_equipamento(self, equipamento: Equipamento, dias_atraso: int) -> float:
+         return equipamento.calcular_multa(dias_atraso) 
         return atrasados

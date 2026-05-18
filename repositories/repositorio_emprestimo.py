@@ -27,3 +27,16 @@ class RepositorioEmprestimo:
 
     def listar_emprestimos(self):
         return self.emprestimos
+
+        def adicionar_equipamento(self, nome: str, tipo: str) -> Equipamento:
+    if tipo == "livro":
+        eq = Livro(nome)
+    elif tipo == "eletronico":
+        eq = EquipamentoEletronico(nome)
+    elif tipo == "esportivo":
+        eq = MaterialEsportivo(nome)
+    else:
+        eq = Livro(nome)
+    
+    self.equipamentos.append(eq)
+    return eq
