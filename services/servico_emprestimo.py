@@ -1,76 +1,65 @@
-from repositories.repositorio_emprestimo import RepositorioEmprestimo
-from services.notificador import Notificador
+from datetime import date
+from models.equipamento import Equipamento
 
 
 class ServicoEmprestimo:
-    def __init__(self):
-        self.repositorio = RepositorioEmprestimo()
-        self.notificador = Notificador()
-
-    def registrar_emprestimo(self, nome_equipamento, usuario):
-        equipamento = self.repositorio.buscar_equipamento(nome_equipamento)
-
-        if equipamento is None:
-            print("Equipamento não encontrado.")
-            return
-
-        if not equipamento["disponivel"]:
-            print("Equipamento indisponível.")
-            return
-
-        emprestimo = {
-            "usuario": usuario,
-            "equipamento": equipamento,
-            "dias_atraso": 0
-        }
-
-        self.repositorio.adicionar_emprestimo(emprestimo)
-        self.repositorio.marcar_indisponivel(equipamento)
-
-        self.notificador.enviar_email(
-            f"Empréstimo registrado para {usuario}"
-        )
-
-        print("Empréstimo registrado com sucesso.")
-
-    def devolver_equipamento(self, nome_equipamento, dias_atraso):
-        for emprestimo in self.repositorio.listar_emprestimos():
-            equipamento = emprestimo["equipamento"]
-
-            if equipamento["nome"].lower() == nome_equipamento.lower():
-
-                multa = 0
-
-                # Mantido propositalmente (problema de OCP)
-                if equipamento["tipo"] == "notebook":
-                    multa = dias_atraso * 10
-
-                elif equipamento["tipo"] == "camera":
-                    multa = dias_atraso * 5
-
-                self.repositorio.marcar_disponivel(equipamento)
-
-                self.notificador.enviar_email(
-                    f"Equipamento devolvido. Multa: R${multa}"
-                )
-
-                print("Devolução realizada.")
-                return
-
-        print("Empréstimo não encontrado.")
-
-    def listar_atrasados(self):
+    """
+    Serviço para gerenciar operações de empréstimo.
+    
+    OCP: Eliminação de if/elif - cada equipamento calcula sua própria multa
+    através do método polimórfico calcular_multa().
+    """
+    
+    def __init__(self, repositorio):
+        self.repositorio = repositorio
+    
+    def calcular_multa_equipamento(self, equipamento: Equipamento, dias_atraso: int) -> float:
+        """
+        Calcula a multa para um equipamento específico.
+        
+        OCP aplicado: SEMPRE mais if/elif!
+        Chamada polimórfica - cada subclasse implementa sua própria fórmula.
+        """
+        # Chamada polimórfica - cada subclasse define sua própria fórmula
+        return equipamento.calcular_multa(dias_atraso)
+    
+    def listar_atrasados(self, equipamentos: list[Equipamento], data_atual: date) -> list[tuple]:
+        """
+        Retorna lista de equipamentos atrasados com suas multas.
+        
+        OCP aplicado: não há duplicação de lógica de cálculo de multa
+        - cada equipamento sabe calcular sua própria multa.
+        """
         atrasados = []
-
-        for emprestimo in self.repositorio.listar_emprestimos():
-            if emprestimo["dias_atraso"] > 0:
-                atrasados.append(emprestimo)
-
-                if tipo == "livro":
-                  multa = 2.0 * dias_atraso
-                   elif tipo == "eletronico":
-                   multa = 10.0 * dias_atraso
-                  
-     def calcular_multa_equipamento(self, equipamento: Equipamento, dias_atraso: int) -> float:
-         return equipamento.calcular_multa(dias_atraso) 
+        
+        for eq in equipamentos:
+            dias_atraso = eq.get_dias_atraso(data_atual)
+            if dias_atraso > 0:
+                # Chamada polimórfica - sem duplicação!
+                multa = eq.calcular_multa(dias_atraso)
+                atrasados.append((eq.nome, dias_atraso, multa))
+        
         return atrasados
+    
+    def emprequisar(self, nome_equipamento: str, data_emprestimo: date, prazo_dias: int = 7) -> bool:
+        """Registra empréstimo de um equipamento."""
+        eq = self.repositorio.buscar_por_nome(nome_equipamento)
+        if eq is None:
+            return False
+        
+        eq.registrar_emprestimo(data_emprestimo)
+        return True
+    
+    def devolver_equipamento(self, nome_equipamento: str, data_devolucao: date) -> float | None:
+        """Registra devolução e retorna a multa (se houver atraso)."""
+        eq = self.repositorio.buscar_por_nome(nome_equipamento)
+        if eq is None:
+            return None
+        
+        eq.registrar_devolucao(data_devolucao)
+        dias_atraso = eq.get_dias_atraso(data_devolucao)
+        
+        if dias_atraso > 0:
+            return eq.calcular_multa(dias_atraso)
+        
+        return 0.0

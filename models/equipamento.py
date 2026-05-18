@@ -4,7 +4,7 @@ class Equipamento:
         self.tipo = tipo
         self.disponivel = disponivel
 
-        from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 from datetime import date, timedelta
 
 class Equipamento(ABC):

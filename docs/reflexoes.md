@@ -23,31 +23,13 @@ enquanto o Notificador ficou isolado para comunicação externa.
 
 ## Aula 05 — OCP
 
-A hierarquia criada aplica o Princípio Aberto/Fechado (OCP) através de polimorfismo, funcionando bem para variações por tipo de equipamento. No entanto, sua eficácia tem limites quando enfrentamos requisitos radicalmente novos.
+A hierarquia criada aplica OCP via polimorfismo, funcionando bem para variações por **tipo** de equipamento. Porém, tem limites com requisitos radicalmente novos.
 
-Se surgisse um equipamento cuja multa fosse cobrada **por hora** em vez de por dia, ou cuja política dependesse do **dia da semana**, a decomposição atual seria **insuficiente** e exigiria reestruturação. Adicionar um novo tipo de equipamento (ex: `EquipamentoPorHora`) exigiria criar uma nova subclasse, o que respeita o OCP. Porém, mudar a **lógica de cobrança** para todos os tipos existentes (ex: de "por dia" para "por hora") demandaria modificar múltiplas classes, violando o princípio.
+Se surgir um equipamento com multa **por hora** (não por dia) ou política dependente do **dia da semana**, a decomposição atual seria **insuficiente**. Adicionar novo tipo (`EquipamentoPorHora`) respeita OCP, mas mudar a **lógica de cobrança** para todos exigiria modificar múltiplas classes, violando o princípio.
 
-Valente (Cap. 5) explícitamente discute os limites do OCP: *"O OCP recomenda pensar nos pontos de extensão já no momento da implementação, mas não é possível prever todas as evoluções futuras. Quando a variação não é por tipo, mas por estratégia ou contexto, herança torna-se inadequada e outros mecanismos como o padrão Strategy são necessários"* [Valente, Cap. 5].
+Valente (Cap. 5) afirma: *"O OCP recomenda pensar nos pontos de extensão já na implementação, mas não é possível prever todas as evoluções futuras. Quando a variação não é por tipo, mas por estratégia ou contexto, herança torna-se inadequada e outros mecanismos como o padrão Strategy são necessários"* [Valente, Cap. 5].
 
-Nesses casos, uma abordagem baseada em **estratégia** (padrão de projeto) ou **funções de cálculo injetadas** seria mais flexível, permitindo novas políticas de multa sem criar subclasses ou modificar código existente.
-
----
+Nesses casos, uma abordagem baseada em **estratégia** (padrão de projeto) ou **funções de cálculo injetadas** seria mais flexível, permitindo novas políticas sem criar subclasses ou modificar código existente.
 
 **Referência:**  
-Valente, M. T. *Engenharia de Software Moderna: Princípios e Práticas para Desenvolvimento de Software com Produtividade*, Capítulo 5 — Princípios de Projeto, seção sobre OCP. Disponível em https://engsoftmoderna.info/cap5.html
-"""
-
-print("Conteúdo dos arquivos para o exercício OCP:")
-print("=" * 60)
-print("\n1. models/equipamento.py:")
-print("-" * 40)
-print(import_text)
-print("\n2. repositories/repositorio_emprestimo.py:")
-print("-" * 40)
-print(repositorio_text)
-print("\n3. services/servico_emprestimo.py:")
-print("-" * 40)
-print(servico_text)
-print("\n4. docs/reflexoes.md:")
-print("-" * 40)
-print(reflexao_text)
+Valente, M. T. *Engenharia de Software Moderna*, Capítulo 5 — Princípios de Projeto. Disponível em https://engsoftmoderna.info/cap5.html
