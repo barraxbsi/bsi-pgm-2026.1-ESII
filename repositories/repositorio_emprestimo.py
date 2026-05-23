@@ -4,7 +4,6 @@ class RepositorioEmprestimo:
             {"nome": "Notebook", "tipo": "notebook", "disponivel": True},
             {"nome": "Camera", "tipo": "camera", "disponivel": True},
         ]
-
         self.emprestimos = []
 
     def listar_equipamentos(self):
