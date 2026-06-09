@@ -1,2 +1,6 @@
 # Ignore macOS system files
 .DS_Store
+__pycache__/
+tests/__pycache__/
+*.pyc
+.pytest_cache/

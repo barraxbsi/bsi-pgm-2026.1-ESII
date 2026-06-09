@@ -33,3 +33,10 @@ Nesses casos, uma abordagem baseada em **estratégia** (padrão de projeto) ou *
 
 **Referência:**  
 Valente, M. T. *Engenharia de Software Moderna*, Capítulo 5 — Princípios de Projeto. Disponível em https://engsoftmoderna.info/cap5.html
+
+
+## Aula 09 — TDD
+
+Ao comparar TDD e BDD, considero que o BDD comunica melhor com clientes não técnicos. Os cenários escritos no formato Dado-Quando-Então utilizam uma linguagem próxima das regras de negócio, permitindo que pessoas sem conhecimento de programação entendam o comportamento esperado do sistema. Já o TDD é mais adequado para desenvolvedores, pois os testes automatizados descrevem o comportamento de forma técnica e verificável pelo código.
+
+Eu prefiro utilizar TDD durante a implementação porque ele fornece feedback rápido, ajuda a evitar erros e incentiva a criação de código mais simples e testável. Por outro lado, o BDD é mais útil quando há necessidade de alinhar expectativas entre clientes, analistas e equipe de desenvolvimento. Dessa forma, as duas abordagens são complementares: o BDD ajuda a definir o que deve ser construído e o TDD auxilia na construção correta da solução.
