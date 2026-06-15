@@ -1,5 +1,5 @@
-from models.equipamento import Equipamento, Livro, EquipamentoEletronico, MaterialEsportivo
-
+from models.equipamento import Equipamento
+from models.fabrica_equipamento import FabricaEquipamento
 
 class RepositorioEmprestimo:
     """
@@ -16,15 +16,7 @@ class RepositorioEmprestimo:
         OCP: Agora cada tipo é instanciado pela sua própria classe,
         não pela classe genérica.
         """
-        if tipo == "livro":
-            eq = Livro(nome)
-        elif tipo == "eletronico":
-            eq = EquipamentoEletronico(nome)
-        elif tipo == "esportivo":
-            eq = MaterialEsportivo(nome)
-        else:
-            # Padrão: Livro
-            eq = Livro(nome)
+       eq = FabricaEquipamento.criar(tipo, nome)
         
         self.equipamentos.append(eq)
         return eq
