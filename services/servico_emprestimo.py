@@ -1,6 +1,37 @@
 from repositories.repositorio_emprestimo import RepositorioEmprestimo
 from services.notificador import Notificador
 
+from services.observer import Subject
+
+class ServicoEmprestimo(Subject):
+    def __init__(self, repositorio):
+        super().__init__()
+        self.repositorio = repositorio
+
+    def registrar(self, equipamento_id, usuario_nome, usuario_email, dias):
+        # sua regra antiga continua aqui
+        self.notificar({
+            "tipo": "emprestimo",
+            "email": usuario_email,
+            "data": data_devolucao
+        })
+        return True
+
+    def devolver(self, emprestimo_id):
+        # sua regra antiga continua aqui
+        self.notificar({
+            "tipo": "devolucao",
+            "email": emprestimo.usuario_email,
+            "multa": multa
+        })
+
+    def listar_atrasados(self):
+        # sua regra antiga continua aqui
+        self.notificar({
+            "tipo": "atraso",
+            "email": emprestimo.usuario_email
+        })
+
 
 class ServicoEmprestimo:
     def __init__(self):
