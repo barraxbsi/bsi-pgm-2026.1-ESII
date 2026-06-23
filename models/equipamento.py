@@ -1,5 +1,25 @@
+from dataclasses import dataclass
+from models.multa_strategy import MultaStrategy
+
+@dataclass
 class Equipamento:
-    def __init__(self, nome, tipo, disponivel=True):
-        self.nome = nome
-        self.tipo = tipo
-        self.disponivel = disponivel
+    id: int
+    nome: str
+    tipo: str
+    multa: MultaStrategy
+    disponivel: bool = True
+
+    def calcular_multa(self, dias_atraso: int) -> float:
+        return self.multa.calcular(dias_atraso)
+
+@dataclass
+class Notebook(Equipamento):
+    pass
+
+@dataclass
+class Projetor(Equipamento):
+    pass
+
+@dataclass
+class Cabo(Equipamento):
+    pass
